@@ -8,35 +8,42 @@ import Display2x from './components/Display2x/Display2x';
 
 export const App = () => {
 
-  const minCount = 0;
-  const maxCount = 5;
+
   const titleBtn_1 = 'inc';
   const titleBtn_2 = 'reset';
   const titleBtn_3 = 'set';
 
-  const [count, setCount] = useState<number>(minCount);
+  const [count, setCount] = useState<number>(0);
+  const [start, setStart] = useState<number>(0)
+  const [max, setMax] = useState<number>(0)
 
   const onClickUpCountHandler = () => {
-    if (count < maxCount) {
+    if (count < max) {
       setCount(count + 1)
     }
   }
 
   const onClickDownCountHandler = () => {
-    if (count > minCount) {
+    if (count > start) {
       setCount(0)
     }
   }
+  const setToLocalStorage = () => {
+    localStorage.setItem('start', start.toString())
+    localStorage.setItem('max', max.toString())
+  }
+  const getFromLocalStorage = () => {
 
-  const disabledStyleInc = (count === maxCount) ? true : false;
-  const disabledStyleRes = (count === minCount) ? true : false;
+  }
+  const disabledStyleInc = (count === max) ? true : false;
+  const disabledStyleRes = (count === start) ? true : false;
 
   return (
     <div className="App">
       <div className='counterWrapper'>
-        <Display2x />
+        <Display2x start={start} max={max} setStart={setStart} setMax={setMax} />
         <div className='buttonBlock'>
-          <Button name={titleBtn_3} disabled={false} callback={()=>{}}/>
+          <Button name={titleBtn_3} disabled={false} callback={setToLocalStorage} />
         </div>
       </div>
       <div className='counterWrapper'>
