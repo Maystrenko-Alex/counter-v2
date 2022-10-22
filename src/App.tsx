@@ -8,14 +8,15 @@ import Display2x from './components/Display2x/Display2x';
 
 export const App = () => {
 
-
+  const startvalue = (Number(localStorage.getItem('start')) || 0 )
+  const maxtvalue = (Number(localStorage.getItem('max')) || 0 )
   const titleBtn_1 = 'inc';
   const titleBtn_2 = 'reset';
   const titleBtn_3 = 'set';
 
   const [count, setCount] = useState<number>(0);
-  const [start, setStart] = useState<number>(0)
-  const [max, setMax] = useState<number>(0)
+  const [start, setStart] = useState<number>(startvalue)
+  const [max, setMax] = useState<number>(maxtvalue)
 
   const onClickUpCountHandler = () => {
     if (count < max) {
@@ -31,13 +32,13 @@ export const App = () => {
   const setToLocalStorage = () => {
     localStorage.setItem('start', start.toString())
     localStorage.setItem('max', max.toString())
+    setCount(Number(localStorage.getItem('start')))
+    
   }
-  const getFromLocalStorage = () => {
-
-  }
+ 
   const disabledStyleInc = (count === max) ? true : false;
-  const disabledStyleRes = (count === start) ? true : false;
-
+  const disabledStyleRes = (count === start && start !== max) ? true : false;
+  
   return (
     <div className="App">
       <div className='counterWrapper'>
@@ -47,7 +48,7 @@ export const App = () => {
         </div>
       </div>
       <div className='counterWrapper'>
-        <Display count={count} />
+        <Display count={count ? count : 'enter values and press key'} start={start} max={max}/>
         <div className='buttonBlock'>
           <Button name={titleBtn_1} disabled={disabledStyleInc} callback={onClickUpCountHandler} />
           <Button name={titleBtn_2} disabled={disabledStyleRes} callback={onClickDownCountHandler} />

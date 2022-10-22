@@ -1,12 +1,14 @@
 import React from 'react';
 
 export type DisplayPropsType = {
-  count: number
+  count: number | string
+  start: number
+  max: number
 }
 
 export const Display = (props: DisplayPropsType) => {
 
-const styleDisplay = props.count === 5 ? 'displayBlock  redDisplay' : 'displayBlock';
+const styleDisplay = props.count === props.max ? 'displayBlock  redDisplay' : 'displayBlock';
 
   return (
     <div className={styleDisplay}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import s from './Display2x.module.css';
 type Display2xPropsType = {
   start: number
@@ -9,24 +9,39 @@ type Display2xPropsType = {
 }
 const Display2x = (props: Display2xPropsType) => {
   const [error, setError] = useState<boolean>(false)
+  const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (Number(e.currentTarget.value) >= 0) {
+      props.setMax(Number(e.currentTarget.value))
+    } else {
+      setError(true)
+    }
+  }
+  const onChangeStartValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (Number(e.currentTarget.value) >= 0) {
+      props.setStart(Number(e.currentTarget.value))
+      setError(false)
+    } else {
+      setError(true)
+    }
+  }
   return (
     <div className={'displaySettings'}>
       <div className={s.text}>
         <span>{'max value:'}</span>
-        <input 
-          className={error ? s.borderError : s.border } 
+        <input
+          className={error ? s.borderError : s.border}
           type={'number'}
           value={props.max}
-          onChange={(e)=>props.setMax(Number(e.currentTarget.value))}
+          onChange={onChangeMaxValueHandler}
         />
       </div>
       <div className={s.text}>
         <span>{'start value:'}</span>
-        <input 
-          className={error ? s.borderError : s.border } 
+        <input
+          className={error ? s.borderError : s.border}
           type={'number'}
           value={props.start}
-          onChange={(e)=>props.setStart(Number(e.currentTarget.value))}
+          onChange={onChangeStartValueHandler}
         />
       </div>
     </div>
