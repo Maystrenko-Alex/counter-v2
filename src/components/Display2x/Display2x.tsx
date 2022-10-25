@@ -10,42 +10,50 @@ type Display2xPropsType = {
 const Display2x = (props: Display2xPropsType) => {
   const [error, setError] = useState<boolean>(false)
   const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    props.setMax(Number(e.currentTarget.value))
     if (Number(e.currentTarget.value) >= 0) {
-      props.setMax(Number(e.currentTarget.value))
     } else {
       setError(true)
     }
+    localStorage.setItem('isSettings', 'false')
   }
   const onChangeStartValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    props.setStart(Number(e.currentTarget.value))
     if (Number(e.currentTarget.value) >= 0) {
-      props.setStart(Number(e.currentTarget.value))
       setError(false)
     } else {
       setError(true)
     }
+    localStorage.setItem('isSettings', 'false')
   }
   return (
     <div className={'displaySettings'}>
-      <div className={s.text}>
-        <span>{'max value:'}</span>
-        <input
-          className={error ? s.borderError : s.border}
-          type={'number'}
-          value={props.max}
-          onChange={onChangeMaxValueHandler}
-        />
-      </div>
-      <div className={s.text}>
-        <span>{'start value:'}</span>
-        <input
-          className={error ? s.borderError : s.border}
-          type={'number'}
-          value={props.start}
-          onChange={onChangeStartValueHandler}
-        />
-      </div>
+      <SettingsForCounter title={'max value:'} error={error} setting={props.max } callback={onChangeMaxValueHandler} />
+      <SettingsForCounter title={'start value:'} error={error} setting={props.start} callback={onChangeStartValueHandler} />
     </div>
   );
 };
+
+type SettingsForCounterPropsType = {
+  title: string
+  error: boolean
+  setting: number
+  callback: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
+const SettingsForCounter = (props: SettingsForCounterPropsType) => {
+  return (
+    <div className={s.text}>
+      <span>{props.title}</span>
+      <input
+        className={props.error ? s.borderError : s.border}
+        type={'number'}
+        value={props.setting}
+        onChange={props.callback}
+      />
+    </div>
+  )
+}
+
 
 export default Display2x;

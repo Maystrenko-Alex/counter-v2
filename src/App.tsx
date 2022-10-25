@@ -9,7 +9,7 @@ import Display2x from './components/Display2x/Display2x';
 export const App = () => {
 
   const startvalue = (Number(localStorage.getItem('start')) || 0 )
-  const maxtvalue = (Number(localStorage.getItem('max')) || 0 )
+  const maxtvalue = (Number(localStorage.getItem('max')) || 5 )
   const titleBtn_1 = 'inc';
   const titleBtn_2 = 'reset';
   const titleBtn_3 = 'set';
@@ -32,19 +32,22 @@ export const App = () => {
   const setToLocalStorage = () => {
     localStorage.setItem('start', start.toString())
     localStorage.setItem('max', max.toString())
+    localStorage.setItem('isSettings', 'true')
+
     setCount(Number(localStorage.getItem('start')))
     
   }
  
   const disabledStyleInc = (count === max) ? true : false;
   const disabledStyleRes = (count === start && start !== max) ? true : false;
+  const disabledSettings = localStorage.getItem('isSettings') === 'true' ? true : false
   
   return (
     <div className="App">
       <div className='counterWrapper'>
         <Display2x start={start} max={max} setStart={setStart} setMax={setMax} />
         <div className='buttonBlock'>
-          <Button name={titleBtn_3} disabled={false} callback={setToLocalStorage} />
+          <Button name={titleBtn_3} disabled={disabledSettings} callback={setToLocalStorage} />
         </div>
       </div>
       <div className='counterWrapper'>
@@ -57,4 +60,5 @@ export const App = () => {
     </div>
   );
 }
+
 
