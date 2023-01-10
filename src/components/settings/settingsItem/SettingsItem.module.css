@@ -1,0 +1,27 @@
+.wrapper {
+  margin: 15px;
+  color: #5ed5f7;
+  display: flex;
+  max-width: 100%;
+  justify-content: space-between;
+  
+
+}
+.title {
+  font-weight: 600;
+  width: 50%;
+}
+.inputBlock {
+ width: 50%;
+}
+
+.input {
+  border: 3px solid #5ed5f7;
+  border-radius: 5px;
+  max-width: 80%;
+  text-align: center;
+  font-size: 26px;
+}
+.error {
+  border: 3px solid red;
+}

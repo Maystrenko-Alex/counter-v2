@@ -1,71 +1,7 @@
 .App {
-  text-align: center;
-  width: 1280px;
-  padding-top: 100px;
-  padding-left: 50px;
+  height: 300px;
   display: flex;
-}
-
-.counterWrapper {
-  width: 300px;
-  height: 250px;
-  border: 3px solid rgb(69, 207, 190);
-  border-radius: 5px;
-  padding: 25px;
-}
-
-.displayBlock {
-  height: 45%;
-  border: 3px solid rgb(69, 207, 190);
-  border-radius: 5px;
-  background-color: rgb(69, 207, 190);
-  font-size: 30px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
   justify-content: center;
-
-}
-
-.displaySettings {
-  height: 45%;
-  border: 3px solid rgb(69, 207, 190);
-  border-radius: 5px;
-  background-color: rgb(22, 20, 29);
-  color: rgb(69, 207, 190);
-  font-size: 20px;
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  align-items:  center;
-  justify-content: space-around;
-
-}
-.displaySettings input {
-  width: 30%;
-  padding: 10px 10px;
-  /* margin-left: 25px; */
-}
-.buttonBlock {
-  margin-top: 20px;
-  
-
-  border: 3px solid rgb(69, 207, 190);
-  border-radius: 5px;
-  height: 45%;
-  display: flex;
-  justify-content: space-around;
   align-items: center;
-}
-
-.buttonBlock button {
-  height: 50px;
-  padding: 0px 15px;
-  font-size: 38px;
-  background-color: rgb(69, 207, 190);
-  border-radius: 10px;
-  font-weight: 600;
-}
-.redDisplay {
-  color: red;
+  gap: 50px;
 }

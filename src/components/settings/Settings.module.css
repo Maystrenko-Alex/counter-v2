@@ -1,0 +1,30 @@
+.wrapper {
+  border: 3px solid #5ed5f7;
+  border-radius: 5px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  height: 100%;
+  gap: 15px;
+}
+
+.valueContainer {
+  width: 100%;
+  height: 70%;
+  border: 3px solid #5ed5f7;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.buttonContainer {
+  width: 100%;
+  height: 30%;
+  border: 3px solid #5ed5f7;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

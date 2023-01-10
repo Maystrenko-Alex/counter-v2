@@ -1,26 +1,15 @@
-import React from 'react';
-
-export type ButtonPropsType = {
-  name: string
-  disabled: boolean
-  callback: () => void
+import React, { ReactNode } from 'react';
+import style from './Button.module.css';
+type ButtonPropsType = {
+  title: string
+  onClickCallback: () => void
+  disabled?: boolean
 }
-
-export const Button = (props: ButtonPropsType) => {
-
-  // const onClickHandler = () => {
-  //   props.callback()
-  // }
-
+export const Button = ({onClickCallback, title, disabled}:ButtonPropsType) => {
+  const onClickHandler = () => onClickCallback()
   return (
-    <div>
-      <button
-        disabled={props.disabled}
-        onClick={props.callback}
-      >
-        {props.name}
-      </button>
+    <div className={style.wrapper}>
+      <button className={style.button} onClick={onClickHandler} disabled={disabled && false}>{title}</button>
     </div>
-  );
-};
-
+  )
+}  
