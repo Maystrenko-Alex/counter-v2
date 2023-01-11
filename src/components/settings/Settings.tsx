@@ -5,36 +5,56 @@ import { SettingsItem } from "./settingsItem/SettingsItem";
 
 
 type SettingsPropsType = {
-  startValue: number
-  maxValue: number
   editMode: boolean
-  setStartValue: (value: number) => void
-  setMaxValue: (value: number) => void
   setEditMode: (status: boolean) => void
-  setCount: (value: number) => void
+  error: boolean
+  setError: (status: boolean) => void
 }
 export const Settings = (props: SettingsPropsType) => {
+  const [startValue, setStartValue] = useState<number>(Number(localStorage.getItem('startvalue')) || 0)
+  const [maxValue, setMaxValue] = useState<number>(Number(localStorage.getItem('maxvalue')) || 5)
 
-
+  if (startValue === maxValue) {
+    props.setError(true)
+  } else {
+    props.setError(false)
+  }
   const setValueToLocalStorage = () => {
     if (props.editMode) {
-      localStorage.setItem('startvalue', props.startValue.toString())
-      localStorage.setItem('maxvalue', props.maxValue.toString())
-      props.setCount(props.startValue)
+      localStorage.setItem('startvalue', startValue.toString())
+      localStorage.setItem('maxvalue', maxValue.toString())
       props.setEditMode(false)
+      console.log(props.editMode)
     }
-
   }
 
-  
+
   return (
     <div className={style.wrapper}>
       <div className={style.valueContainer}>
-        <SettingsItem title={'max value'} value={props.maxValue}  callback={props.setMaxValue} setEditMode={props.setEditMode}/>
-        <SettingsItem title={'start value'} value={props.startValue} callback={props.setStartValue} setEditMode={props.setEditMode}/>
+        <SettingsItem
+          title={'maxvalue'} 
+          value={maxValue} 
+          callback={setMaxValue}
+          setEditMode={props.setEditMode} 
+          setError={props.setError}
+          error={props.error}
+        />
+        <SettingsItem
+          title={'startvalue'} 
+          value={startValue} 
+          callback={setStartValue}
+          setEditMode={props.setEditMode} 
+          setError={props.setError}
+          error={props.error}
+        />
       </div>
       <div className={style.buttonContainer}>
-        <Button title={'set'} onClickCallback={setValueToLocalStorage} disabled={!props.editMode} />
+        <Button
+          title={'set'}
+          onClickCallback={setValueToLocalStorage}
+          disabled={props.error && props.editMode}
+        />
       </div>
     </div>
   );

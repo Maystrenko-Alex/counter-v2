@@ -5,18 +5,25 @@ import style from './SettingsItem.module.css'
 type SettingsItemPropsType = {
   title: string
   value: number
+  error: boolean
   setEditMode: (status: boolean) => void
+  setError: (status: boolean) => void
   callback: (value: number) => void
 }
 export const SettingsItem = (props: SettingsItemPropsType) => {
-  
-  const [error, setError] = useState<boolean>(false);
 
 
   const onChangeValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    props.setEditMode(true)
-   props.callback(+e.currentTarget.value)
+    if (+e.currentTarget.value < 0) {
+      props.setError(true)
+    } else {
+      props.setError(false)
+      props.setEditMode(true)
+    }
+    props.callback(+e.currentTarget.value)
   }
+
+  const finalClassName = `${style.input} ${props.value < 0 || props.error ? style.error : ''}`
   return (
     <div className={style.wrapper}>
       <span className={style.title}>
@@ -24,7 +31,7 @@ export const SettingsItem = (props: SettingsItemPropsType) => {
       </span>
       <div className={style.inputBlock}>
         <input
-          className={`${style.input} ${props.value < 0 ? style.error : ''}`}
+          className={finalClassName}
           value={props.value}
           type='number'
           onChange={onChangeValueHandler}

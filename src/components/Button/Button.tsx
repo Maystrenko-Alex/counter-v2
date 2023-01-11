@@ -9,7 +9,7 @@ export const Button = ({onClickCallback, title, disabled}:ButtonPropsType) => {
   const onClickHandler = () => onClickCallback()
   return (
     <div className={style.wrapper}>
-      <button className={style.button} onClick={onClickHandler} disabled={disabled && false}>{title}</button>
+      <button className={style.button} onClick={onClickHandler} disabled={disabled}>{title}</button>
     </div>
   )
 }  

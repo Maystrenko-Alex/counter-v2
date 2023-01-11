@@ -8,21 +8,21 @@ import { Settings } from './components/settings/Settings';
 
 export const App = () => {
 
-  const [startValue, setStartValue] = useState<number>(0)
-  const [maxValue, setMaxValue] = useState<number>(5)
-  const [count, setCount] = useState<number>(startValue)
-  const [error, seterror] = useState<boolean>(false)
-  const [editMode, setEditMode] = useState<boolean>(false)
+
+  const [editMode, setEditMode] = useState<boolean>(true)
+  const [error, setError] = useState<boolean>(false)
 
   return (
     <div className="App">
-      <Settings 
-        startValue={startValue} setStartValue={setStartValue} 
-        maxValue={maxValue} setMaxValue={setMaxValue}
+      <Settings
         editMode={editMode} setEditMode={setEditMode}
-        setCount={setCount}
-        />
-      <Counter count={count} setCount={setCount}/>
+        error={error} setError={setError}
+
+      />
+      <Counter
+        editMode={editMode} setEditMode={setEditMode}
+        error={error} setError={setError}
+       />
     </div>
   );
 }
